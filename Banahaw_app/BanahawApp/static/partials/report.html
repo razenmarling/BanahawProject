@@ -1,0 +1,31 @@
+<head>
+	<link href="css/content/transaction.css" rel="stylesheet">
+	<title></title>
+</head>
+
+
+<div id="main">
+
+<h3>Generate Transaction Report</h3>
+<br>
+
+<div style="width: 30% !important">
+	<datepicker datepicker-class="class1" date-format="yyyy-MM-dd" >
+		<input class="input form-control class2" class="fillup" type="text" name="" placeholder="Startdate" ng-model="Startdate">
+	</datepicker>
+</div>
+<br>
+<br>
+<div style="width: 30% !important">
+	<datepicker datepicker-class="class1" date-format="yyyy-MM-dd" >
+		<input class="input form-control class2" class="fillup" type="text" name="" placeholder="Enddate" ng-model="Enddate">
+	</datepicker>
+</div>
+<br>
+<br>
+<br>
+<div style="width: 30% !important">
+	<button class="button" ng-click="generate(Startdate,Enddate)">Generate Report</button>
+</div>
+
+</div>

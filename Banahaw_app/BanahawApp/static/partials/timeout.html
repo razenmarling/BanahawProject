@@ -1,0 +1,16 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>Time-Out</h3>
+<br>
+
+<div id="validation">
+  <input class="input-top form-control" type="text" placeholder="Enter Name of Attendant:" autofocus="true" ng-model="name" uib-typeahead="m.attendant_name for m in attendants | filter:$viewValue" typeahead-on-select="attendantvalidation($item)">
+
+</div>
+<button class="timeintimeout" ng-disabled="enabledbutton || !name" ng-click="timein()">Time - Out</button>
+</div>

@@ -1,0 +1,13 @@
+<div class="modal-header">
+	<h3 class="modal-title">Reservation Time</h3>
+<div class="modal-body">
+
+	<div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+
+</div>
+<div class="modal-footer">
+	<button class="btn btn-warning" type="button"
+	ng-click="ok()">OK</button>
+	<button class="btn btn-warning" type="button"
+	ng-click="cancel()">Cancel</button>
+</div>

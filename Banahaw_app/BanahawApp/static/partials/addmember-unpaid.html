@@ -1,0 +1,154 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+</head>
+
+<h3>Add-Member</h3>
+<br>
+
+<div id="main">
+<div id="divmain3">
+<table>
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+         
+      </div>
+  </thead>
+  <thead>
+      <div style="background-color: #D3D3D3;width: 100%; height: 40px;"></div>
+  </thead>
+</table>
+<div class="div-content">
+  <div class="form2">
+    <div class="table-responsive">
+      <table class="table table-striped">
+
+        <tbody>
+
+          <tr>
+            <td>Membership Type</td>
+            <td></td>
+            <td>
+              <select class="input form-control" ng-model="membertype" ng-change="OnChangeofMembertype(membertype)">
+                <option>Personalized</option>
+                <option>Family</option>
+            </select>
+            </td>
+          </tr>
+
+          <tr ng-hide="personalized">
+            <td>Name</td>
+            <td></td>
+            <td>
+              <form name="nameform">
+              <input class="input form-control" class="fillup" type="text" name="name" placeholder="Name" ng-model="name">
+              </form>
+            </td>
+          </tr>
+
+          <tr ng-hide="personalized">
+            <td>Birthdate</td>
+            <td></td>
+            <td>
+                <datepicker datepicker-class="class1" date-format="dd-MMMM-yyyy" >
+                  <input class="input form-control" class="fillup" type="text" name="" placeholder="Birthdate" ng-model="birthdate">
+                </datepicker>
+            </td>
+          </tr>
+
+          <tr ng-hide="personalized">
+            <td>Address</td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name="" placeholder="Address" ng-model="address">
+            </td>
+          </tr>
+
+          <tr ng-hide="personalized">
+            <td>Mobile Number</td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name="" placeholder="Mobile Number" ng-model="mobileNum">
+            </td>
+          </tr>
+
+          <tr ng-hide="personalized">
+            <td>Landline Number</td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name="" placeholder="Landline Number" ng-model="landlineNum">
+            </td>
+          </tr>
+
+          <tr ng-hide="personalized">
+            <td>Email address</td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name="" placeholder="E-Mail" ng-model="email">
+            </td>
+          </tr>
+          <tr ng-hide="personalized">
+            <td>Remarks</td>
+            <td></td>
+            <td>
+                <select class="input form-control" ng-model="selectedremarks" ng-options="remarks for remarks in remarkslist" ng-change="OnChangeofremarks(selectedremarks)">
+                 <option value="" disabled>Where did you learn/heard Banahaw Heals Spa?</option>
+                </select>
+                <br>
+                <textarea class="input form-control" rows="5" cols="50" placeholder="Please Specify" ng-show="txtarea" ng-model="txtremarks"></textarea>
+            </td>
+          </tr>
+
+          <tr ng-hide="member">
+            <td>Immediate Family Members</td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name=""  size="60" ng-model="submember1" placeholder="Members Name">
+            </td>
+          </tr>
+
+          <tr ng-hide="member">
+            <td></td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name=""  size="60" ng-model="submember2" placeholder="Members Name">
+            </td>
+          </tr>
+
+          <tr ng-hide="member">
+            <td></td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name=""  size="60" ng-model="submember3" placeholder="Members Name">
+            </td>
+          </tr>
+
+          <tr ng-hide="member">
+            <td></td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name=""  size="60" ng-model="submember4" placeholder="Members Name">
+            </td>
+          </tr>
+
+<!--           <tr ng-hide="member">
+            <td></td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name=""  size="60" ng-model="submember5" placeholder="Members Name">
+            </td>
+          </tr> -->
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+</div>
+  <input class="input form-control btn-style" type="submit" name="" value="Confirm"
+  style="position: relative;
+  margin-top: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 30% !important;" ng-click="confirm()" ng-disabled="!name || !membertype">
+</div>

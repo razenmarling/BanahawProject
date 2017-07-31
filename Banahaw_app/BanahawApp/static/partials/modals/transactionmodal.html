@@ -1,0 +1,87 @@
+<div class="modal-header">
+  <h3 class="modal-title">Edit Transaction</h3>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped">
+                
+                <tbody>
+                  <tr>
+                    <td>Services: </td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedservicetype" 
+                      ng-change="OnChangeofServices(selectedservicetype)" ng-options="ST for ST in servicestype">
+                        <option value="" disabled>{{selectedservicetype}}</option>
+                      </select></td>
+                  </tr>
+
+                  <tr ng-hide="HnSregularservies">
+                    <td>Regular Services</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedservice" ng-options="RS.service_name for RS in RegularServices">
+                        <option value="" disabled>{{selectedservice.service_name}}</option>
+                      </select></td>
+                  </tr>
+
+                  <tr ng-hide="HnShealingpackages">
+                    <td>Healing Packages</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedservice" ng-options="HS.package_name for HS in HealingPackages">
+                        <option value="" disabled>{{selectedservice.package_name}}</option>
+                      </select></td>
+                  </tr>
+
+                  <tr ng-hide="HnSfacialservice">
+                    <td>Facial Services</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedservice" ng-options="FS.facial_services_name for FS in FacialServices">
+                        <option value="" disabled>{{selectedservice.facial_services_name}}</option>
+                      </select></td>
+                  </tr>
+
+                  <tr ng-hide="HnSpromoservice">
+                    <td>Promo Services</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedservice" ng-options="PS.description for PS in PromoService">
+                        <option value="" disabled>{{selectedservice.description}}</option>
+                      </select></td>
+                  </tr>
+
+                  <tr>
+                    <td>Add-ons</td>
+                    <td></td>
+                    <td>
+                      <oi-select 
+                        oi-options="AO.add_ons_name for AO in add_ons"
+                        ng-model="bundle"
+                        multiple
+                        placeholder="Select Add-ons Here..">
+                      </oi-select>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Name of Attendant</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selected_attendant" ng-options="Att.attendant_name for Att in attendants">
+                        <option value="" disabled>{{selected_attendant.attendant_name}}</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+          </div>
+
+<div class="modal-footer">
+  <button class="btn btn-warning" type="button"
+  ng-click="confirm()">Save</button>
+  <button class="btn btn-danger" type="button"
+  ng-click="cancel()">Cancel</button>
+</div>

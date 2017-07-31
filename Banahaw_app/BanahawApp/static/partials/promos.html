@@ -1,0 +1,342 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>Services List</h3>
+<br>
+
+<div id="container">
+<!-- <div class="container"> -->
+  <ul class="nav nav-pills" style="margin-left: 10%;">
+    <li class="active"><a data-toggle="pill" href="!#regservices">Regular Services</a></li>
+    <li><a data-toggle="pill" href="!#healpackage">Healing Packages</a></li>
+    <li><a data-toggle="pill" href="!#facial">Facial Services</a></li>
+    <li><a data-toggle="pill" href="!#add-ons">Add-ons</a></li>
+    <li><a data-toggle="pill" href="!#promo">Promo</a></li>
+  </ul>
+  <br>
+
+  <div class="tab-content">
+
+    <div id="regservices" class="tab-pane fade in active">
+	  <input class="input form-control" class="fillup" type="text" name="name" placeholder="Search Regular Services Name..." ng-model="viewbyname" style="width: 80% !important; margin-left: 10%;">
+	  <br>
+			<div id="divmain3" class="table-responsive">
+			<table class="table table-hover" style="font-size:11px;">
+			  <thead>
+			      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+			         
+			      </div>
+			  </thead>
+			  <thead>
+			    <tr style="background-color: #D3D3D3">
+				  <th></th>
+			      <th>Service Name</th>
+			      <th>Off Peak Price</th>
+			      <th>Peak Price</th>
+			      <th>Non-Member Price</th>
+			      <th>Duration(Min)</th>
+			      <th></th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody ng-repeat="data in RegularServices | filter : viewbyname">
+			    <tr>
+			      <td scope="row">
+			        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+			        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+			        </td>
+			      <td ng-bind="data.service_name" class="li-table"></td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.off_peak_price}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "off_peak_price" ng-change = "off_peak_price_change(off_peak_price)">
+			      </td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.peak_price}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "peak_price" ng-change = "peak_price_change(peak_price)">
+			      </td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.non_member_price}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "non_mem_price" ng-change = "non_mem_price_change(non_mem_price)">
+			      </td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.duration}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "duration" ng-change = "duration_change(duration)">
+			      </td>
+			      <td>
+			      	  <button ng-click="editpromo(data)" type="button" class="btn btn-warning btn-xs">
+			      			<span ng-if="!data.edit">Edit</span>
+			      			<span ng-if="data.edit">Cancel</span>
+			      	  </button>
+			      </td>
+			      <td><button ng-click="savepromo('regular_services',data.regular_services_id,off_peak_price,peak_price,non_mem_price,duration,data)" 		type="button" class="btn btn-success btn-xs" ng-if="data.edit">Save</button>
+			      	  <button ng-click="remove('regularservices',data.regular_services_id, $index)" type="button" class="btn btn-danger btn-xs" ng-if="!data.edit">Remove</button>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+
+		<button ng-click="add_new('regservices')" type="button" class="btn btn-danger btn-xs" style="margin-top: 40px; margin-left: 80%;">
+			Add New Service
+		</button>
+
+    </div>
+
+    <div id="healpackage" class="tab-pane fade">
+      <input class="input form-control" class="fillup" type="text" name="name" placeholder="Search Healing Package Name..." ng-model="viewbyname2" style="width: 80% !important; margin-left: 10%;">
+	  <br>
+			<div id="divmain3" class="table-responsive">
+			<table class="table table-hover" style="font-size:11px;">
+			  <thead>
+			      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+			         
+			      </div>
+			  </thead>
+			  <thead>
+			    <tr style="background-color: #D3D3D3">
+				  <th></th>
+			      <th>Package Name</th>
+			      <th>Member Price</th>
+			      <th>Non-Member Price</th>
+			      <th>Duration</th>
+			      <th></th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody ng-repeat="data in HealingPackages | filter : viewbyname2">
+			    <tr>
+			      <td scope="row">
+			        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+			        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+			        </td>
+			      <td ng-bind="data.package_name" class="li-table"></td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.member_price}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "Hmem_price" ng-change = "Hmem_price_change(Hmem_price)">
+			      </td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.non_member_price}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "Hnon_mem_price" ng-change = "Hnon_mem_price_change(Hnon_mem_price)">
+			      </td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.duration}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "Hduration" ng-change = "Hduration_change(Hduration)">
+			      </td>
+			      <td>
+			      	  <button ng-click="editpromo2(data)" type="button" class="btn btn-warning btn-xs">
+			      			<span ng-if="!data.edit">Edit</span>
+			      			<span ng-if="data.edit">Cancel</span>
+			      	  </button>
+			      </td>
+			      <td><button ng-click="savepromo('healing_packages',data.healing_packages_id,Hmem_price,Hnon_mem_price,Hduration,data)" type="button"    class="btn btn-success btn-xs" ng-if="data.edit">Save</button>
+			      	  <button ng-click="remove('healing', data.healing_packages_id, $index)" type="button" class="btn btn-danger btn-xs" ng-if="!data.edit">Remove</button>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+
+		<button ng-click="add_new('package')" type="button" class="btn btn-danger btn-xs" style="margin-top: 40px; margin-left: 80%;">
+			Add New Package
+		</button>
+
+    </div>
+
+    <div id="add-ons" class="tab-pane fade">
+      <input class="input form-control" class="fillup" type="text" name="name" placeholder="Search Add-Ons Name..." ng-model="viewbyname3" style="width: 80% !important; margin-left: 10%;">
+	  <br>
+			<div id="divmain3" class="table-responsive">
+			<table class="table table-hover" style="font-size:11px;">
+			  <thead>
+			      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+			         
+			      </div>
+			  </thead>
+			  <thead>
+			    <tr style="background-color: #D3D3D3">
+				  <th></th>
+			      <th>Add - Ons Name</th>
+			      <th>Member Price</th>
+			      <th>Non-Member Price</th>
+			      <th>Duration</th>
+			      <th></th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody ng-repeat="data in add_ons | filter : viewbyname3">
+			    <tr>
+			      <td scope="row">
+			        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+			        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+			        </td>
+			      <td ng-bind="data.add_ons_name" class="li-table"></td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.member_price}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "Amem_price" ng-change = "Amem_price_change(Amem_price)">
+			      </td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.non_member_price}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "Anon_mem_price" ng-change = "Anon_mem_price_change(Anon_mem_price)">
+			      </td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.duration}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "Aduration" ng-change = "Aduration_change(Aduration)">
+			      </td>
+			      <td>
+			      	  <button ng-click="editpromo3(data)" type="button" class="btn btn-warning btn-xs">
+			      			<span ng-if="!data.edit">Edit</span>
+			      			<span ng-if="data.edit">Cancel</span>
+			      	  </button>
+			      </td>
+			      <td><button ng-click="savepromo('add_ons',data.add_ons_id, Amem_price,Anon_mem_price,Aduration,data)" type="button" class="btn btn-success btn-xs" ng-if="data.edit">Save</button>
+			      	  <button ng-click="remove('addons', data.add_ons_id, $index)" type="button" class="btn btn-danger btn-xs" ng-if="!data.edit">Remove</button>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+
+		<button ng-click="add_new('addons')" type="button" class="btn btn-danger btn-xs" style="margin-top: 40px; margin-left: 80%;">
+			Add New Add-Ons
+		</button>
+
+    </div>
+
+    <div id="facial" class="tab-pane fade">
+      <input class="input form-control" class="fillup" type="text" name="name" placeholder="Search Facial Service Name..." ng-model="viewbyname4" style="width: 80% !important; margin-left: 10%;">
+	  <br>
+			<div id="divmain3" class="table-responsive">
+			<table class="table table-hover" style="font-size:11px;">
+			  <thead>
+			      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+			         
+			      </div>
+			  </thead>
+			  <thead>
+			    <tr style="background-color: #D3D3D3">
+				  <th></th>
+			      <th>Facial Service Name</th>
+			      <th>Member Price</th>
+			      <th>Non-Member Price</th>
+			      <th>Duration</th>
+			      <th></th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody ng-repeat="data in FacialServices | filter : viewbyname4">
+			    <tr>
+			      <td scope="row">
+			        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+			        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+			        </td>
+			      <td ng-bind="data.facial_services_name" class="li-table"></td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.member_price}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "Fmem_price" ng-change = "Fmem_price_change(Fmem_price)">
+			      </td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.non_member_price}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "Fnon_mem_price" ng-change = "Fnon_mem_price_change(Fnon_mem_price)">
+			      </td>
+			      <td class="li-table">
+			      		<span ng-if="!data.edit">{{data.duration}}</span>
+			      		<input ng-if="data.edit" type="text" ng-model = "Fduration" ng-change = "Fduration_change(Fduration)">
+			      </td>
+			      <td>
+			      	  <button ng-click="editpromo4(data)" type="button" class="btn btn-warning btn-xs">
+			      			<span ng-if="!data.edit">Edit</span>
+			      			<span ng-if="data.edit">Cancel</span>
+			      	  </button>
+			      </td>
+			      <td><button ng-click="savepromo('facial_services',data.facial_services_id, Fmem_price,Fnon_mem_price,Fduration,data)" type="button" class="btn btn-success btn-xs" ng-if="data.edit">Save</button>
+			      <button ng-click="remove('facial', data.facial_services_id, $index)" type="button" class="btn btn-danger btn-xs" ng-if="!data.edit">Remove</button></td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+
+		<button ng-click="add_new('facial')" type="button" class="btn btn-danger btn-xs" style="margin-top: 40px; margin-left: 77%;">
+			Add New Facial Service
+		</button>
+
+    </div>
+
+	<div id="promo" class="tab-pane fade">
+	      <input class="input form-control" class="fillup" type="text" name="name" placeholder="Search Promo Name..." ng-model="viewbyname5" style="width: 80% !important; margin-left: 10%;">
+		  <br>
+				<div id="divmain3" class="table-responsive">
+				<table class="table table-hover" style="font-size:11px;">
+				  <thead>
+				      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+				         
+				      </div>
+				  </thead>
+				  <thead>
+				    <tr style="background-color: #D3D3D3">
+					  <th></th>
+				      <th>Promo Name</th>
+				      <th>Member Price</th>
+				      <th>Non-Member Price</th>
+				      <th>Duration</th>
+				      <th>Datestart</th>
+				      <th>Dateend</th>
+				      <th>Active</th>
+				      <th></th>
+				      <th></th>
+				    </tr>
+				  </thead>
+				  <tbody ng-repeat="data in promos | filter : viewbyname5">
+				    <tr>
+				      <td scope="row">
+				        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+				        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+				        </td>
+				      <td ng-bind="data.description" class="li-table"></td>
+				      <td class="li-table">
+				      		<span ng-if="!data.edit">{{data.member_price}}</span>
+				      		<input ng-if="data.edit" type="text" ng-model = "Pmem_price" ng-change = "Pmem_price_change(Pmem_price)">
+				      </td>
+				      <td class="li-table">
+				      		<span ng-if="!data.edit">{{data.non_member_price}}</span>
+				      		<input ng-if="data.edit" type="text" ng-model = "Pnon_mem_price" ng-change = "Pnon_mem_price_change(Pnon_mem_price)">
+				      </td>
+				      <td class="li-table">
+				      		<span ng-if="!data.edit">{{data.duration}}</span>
+				      		<input ng-if="data.edit" type="text" ng-model = "Pduration" ng-change = "Pduration_change(Pduration)">
+				      </td>
+				      <td class="li-table">
+				      		<span ng-if="!data.edit">{{data.datestart.slice(0,-6)}}</span>
+				      		<input ng-if="data.edit" type="text" ng-model = "Pdatestart" ng-change = "Pdatestart_change(Pdatestart)">
+				      </td>
+				      <td class="li-table">
+				      		<span ng-if="!data.edit">{{data.dateend.slice(0,-6)}}</span>
+				      		<input ng-if="data.edit" type="text" ng-model = "Pdateend" ng-change = "Pdateend_change(Pdateend)">
+				      </td>
+				      <td class="li-table">
+				      		<span ng-if="!data.edit">{{data.active}}</span>
+				      		<input ng-if="data.edit" type="checkbox" ng-model = "Pactive" ng-change = "Pactive_change(Pactive)">
+				      </td>
+				      <td>
+				      	  <button ng-click="editpromo5(data)" type="button" class="btn btn-warning btn-xs">
+				      			<span ng-if="!data.edit">Edit</span>
+				      			<span ng-if="data.edit">Cancel</span>
+				      	  </button>
+				      </td>
+				      <td><button ng-click="savepromo2(data.promoid, Pmem_price, Pnon_mem_price, Pduration, Pdatestart, Pdateend, Pactive, data)" type="button" class="btn btn-success btn-xs" ng-if="data.edit">Save</button>
+				      <button ng-click="remove('promo', data.promoid, $index)" type="button" class="btn btn-danger btn-xs" ng-if="!data.edit">Remove</button></td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
+	    </div>
+
+  </div>
+
+<!-- </div> -->
+</div>
+
+</div>

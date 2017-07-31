@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Administrator</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="css/banahaw.css" rel="stylesheet"> -->
+    <link href="css/angular-datepicker.min.css" rel="stylesheet" type="text/css">
+    <link href="css/select.min.css" rel="stylesheet" type="text/css">
+    <link href="css/dropzone.css" rel="stylesheet" type="text/css">
+    <link href="css/basic.css" rel="stylesheet" type="text/css">
+    <!-- <link href="css/angular-material.min.css" rel="stylesheet" type="text/css"> -->
+
+</head>
+
+<body ng-app = 'MyApp2'>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/"><img id="logo" src="img/banahaw4.png"></a>
+            </div>
+            <!-- Top Menu Items -->
+            
+                
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                
+                <ul class="nav navbar-nav side-nav">
+                    </br>
+l                    <li>
+                        <a href="#/"><i class="fa fa-home" aria-hidden="true"></i>&nbsp&nbsp Dashboard</a>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo">
+                        <i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp&nbsp
+                        Transactions </a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#/transaction/members">Member</a>
+                            </li>
+
+                            <li>
+                                <a href="#/transaction/non-members">Non-Member</a>
+                            </li>
+
+                            <li>
+                                <a href="#/transaction/on-going">On-going Transactions</a>
+                            </li>
+
+                            <li>
+                                <a href="#/transaction/history">Transactions History</a>
+                            </li>
+
+                            <li>
+                                <a href="#/transaction/products">Purchase Product</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1">
+                        <i class="fa fa-id-card" aria-hidden="true"></i>&nbsp&nbsp
+                        Membership </a>
+                        <ul id="demo1" class="collapse">
+
+                            <li>
+                                <a href="#/member/addmember">Add Member</a>
+                            </li>
+                            <li>
+                                <a href="#/member/addmember-unpaid">Add Member - (Unpaid)</a>
+                            </li>
+                            <li>
+                                <a href="#/member/upgrademember">Upgrade Membership</a>
+                            </li>
+                            <li>
+                                <a href="#/member/submembers">Add Submember</a>
+                            </li>
+                            <li>
+                                <a href="#/member/viewmembers">View Members</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo2">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp&nbsp
+                        Reservations </a>
+                        <ul id="demo2" class="collapse">
+                            <li>
+                                <a href="#/reservations/add-reservation/members">Members Reservation</a>
+                            </li>
+                            <li>
+                                <a href="#/reservations/add-reservation/non-members">Non-Members Reservation</a>
+                            </li>
+                            <li>
+                                <a href="#/reservations/view-reservation">View Reservations</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo3">
+                        <i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp&nbsp
+                        Reports </a>
+                        <ul id="demo3" class="collapse">
+                            <li>
+                                <a href="#/reports/transaction_report">Transaction Reports</a>
+                            </li>
+                            <li>
+                                <a href="#/reports/members_report">Members List</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo4">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        </i>&nbsp&nbsp Attendants </a> 
+                        <ul id="demo4" class="collapse">
+                            <li>
+                                <a href="#/attendants/new_attendant">New Attendant</a>
+                            </li>
+                            <li>
+                                <a href="#/attendants/del_attendant">View Attendant</a>
+                            </li>
+<!--                             <li>
+                                <a href="#/attendants/rawtime">Encode TimeIn/TimeOut</a>
+                            </li> -->
+                            <li>
+                                <a href="#/attendants/view_attendant">View Attendant Report</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo5">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        </i>&nbsp&nbsp Time and Attendance </a> 
+                        <ul id="demo5" class="collapse">
+                           <li>
+                                <a href="#/attendance/timein">Time-In</a>
+                            </li>
+                            <li>
+                                <a href="#/attendance/timeout">Time-Out</a>
+                            </li>
+                            <li>
+                                <a href="#/attendance/rawtime">Encode TimeIn/TimeOut</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo6">
+                        <i class="fa fa-gift" aria-hidden="true"></i>
+                        </i>&nbsp&nbsp Promos </a> 
+                        <ul id="demo6" class="collapse">
+                            <li>
+                                <a href="#/promos">Services List</a>
+                            </li>
+                            <li>
+                                <a href="#/promos-setup">Setup Promo</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#/upload-members">
+                        <i class="fa fa-upload" aria-hidden="true"></i>
+                        </i>&nbsp&nbsp Upload Members </a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div id="page-wrapper">
+            <p id="member1"></p>
+            <br><br>
+            <div ng-view id="view_div"></div>
+        </div>    
+       
+    </div>
+
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/MyAngular/AdminAngular.js"></script>
+    <script src="js/angular-datepicker.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-2.4.0.min.js"></script>
+    <script src="js/select-tpls.min.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/ng-dropzone.min.js"></script>
+    
+
+</body>
+
+</html>

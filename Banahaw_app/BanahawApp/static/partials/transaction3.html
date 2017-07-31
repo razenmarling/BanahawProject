@@ -1,0 +1,73 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>On-going Transactions</h3>
+<br>
+<div id="div-container">
+<div id="divmain3" class="table-responsive">
+<table class="table table-hover" style="font-size:11px;">
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+         
+      </div>
+  </thead>
+  <thead>
+    <tr style="background-color: #D3D3D3">
+      <th></th>
+      <th>Transaction Type</th>
+      <th>Name</th>
+      <th>Service Availed</th>
+      <th>Attendant</th>
+      <th>Time Started</th>
+      <th>End Time</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody ng-repeat="data in onGoing">
+    <tr ng-click="onclick(data)" ng-class="{red: data.timedone}">
+      <th scope="row">
+        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+        </th>
+      <td ng-bind="data.transaction_type" class="li-table"></td>
+      <td ng-bind="data.client_name" class="li-table"></td>
+      <td ng-bind="data.service_type" class="li-table"></td>
+      <td ng-bind="data.attendant_name" class="li-table"></td>
+      <td ng-bind="data.started" class="li-table"></td>
+      <td ng-bind="data.endtime" class="li-table"></td>
+      <td><button ng-click="cancelTransaction(data,$index)" type="button" class="btn btn-danger btn-xs">Cancel</button></td>
+    </tr>
+    <tr ng-show=data.show>
+      <td colspan="8">
+        <div id="divsamp" class="table-responsive" style="float:left;">
+          <p><b>Transaction Type:</b>{{data.transaction_type}}</p>
+          <p><b>Name:</b>  {{data.client_name}}</p>
+          <p><b>Membership Type:</b>  {{data.client_type}}</p>
+          <p><b>Service Availed:</b>  {{data.service_type}}</p>
+          <p><b>Service Type:</b>  {{data.service}}</p>
+          <br><br><br>
+          <button ng-click="editTransaction(data)" type="button" class="btn btn-warning btn-sm">Edit Transaction</button>
+        </div>
+        <div id="divsamp" class="table-responsive" style="display:inline-block;">
+          <p><b>Add-ons:</b>{{data.add_ons}}</p>
+        </div>
+        <div id="divsamp" class="table-responsive" style="float:right;">
+          <p><b>Attendant:</b>{{data.attendant_name}}</p>
+          <p><b>Estimated Time:</b>{{mintohour(data.estimated_time)}}</p>
+          <p><b>Total amount:</b>₱{{data.total_amount}}</p>
+          <p><b>Payment Type:</b><select class="input form-control" ng-model="selected_payment" ng-change="OnChangeofPaymentType(data,selected_payment,$index)" ng-options="pt for pt in paymentType">
+          <option value="" disabled>Choose Payment Type Here..</option>
+          </p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+</div>
+</div>

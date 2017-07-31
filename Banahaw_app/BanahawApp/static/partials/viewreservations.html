@@ -1,0 +1,86 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>{{restitle}}</h3>
+<br>
+
+<div style="width: 30%;display:inline-block;float:left;" ng-hide = "drange">
+<datepicker datepicker-class="class1" date-format="yyyy-MM-dd" >
+  <input class="input form-control" class="fillup" type="text" name="" placeholder="From" ng-model="viewdate">
+</datepicker>
+<br>
+<br>
+<datepicker datepicker-class="class1" date-format="yyyy-MM-dd">
+  <input class="input form-control" class="fillup" type="text" name="" placeholder="To" ng-model="viewdate2">
+</datepicker>
+<br>
+<br>
+<input class="input form-control btn-style" type="submit" name="" value="Search"
+  style="position: relative;
+  margin-left: 20%;
+  width: 30% !important;" ng-click="search_reservation(viewdate,viewdate2)">
+</div>
+
+<div id="divmain3" class="table-responsive" ng-hide="showtable" style="display:inline-block;width: 77%;float:right;margin-top:-120px;">
+
+<table class="table table-hover" style="font-size:11px;">
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+
+      </div>
+  </thead>
+  <thead>
+    <tr style="background-color: #D3D3D3">
+      <th></th>
+      <th>Transaction Type</th>
+      <th>Name</th>
+      <th>Service Availed</th>
+      <th>Attendant</th>
+      <th>Reservation Date</th>
+      <th>Reservation Time</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody ng-repeat="data in allreservations">
+    <tr ng-click="onclick(data)">
+      <th scope="row">
+        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+        </th>
+      <td ng-bind="data.transaction_type" class="li-table"></td>
+      <td ng-bind="data.client_name" class="li-table"></td>
+      <td ng-bind="data.service_type" class="li-table"></td>
+      <td ng-bind="data.attendant_name" class="li-table"></td>
+      <td ng-bind="data.res_date.slice(0,-6)" class="li-table"></td>
+      <td ng-bind="data.res_time" class="li-table"></td>
+      <td><button type="button" class="btn btn-danger btn-xs" ng-click="cancelreservation(data,$index)">Cancel</button></td>
+    </tr>
+    <tr ng-show=data.show>
+      <td colspan="8">
+        <div id="divsamp" class="table-responsive" style="float:left;">
+          <p><b>Transaction Type:</b>{{data.transaction_type}}</p>
+          <p><b>Name:</b>  {{data.client_name}}</p>
+          <p><b>Membership Type:</b>  {{data.client_type}}</p>
+          <p><b>Service Availed:</b>  {{data.service_type}}</p>
+          <p><b>Service Type:</b>  {{data.service}}</p>
+        </div>
+        <div id="divsamp" class="table-responsive" style="display:inline-block;">
+          <p><b>Add-ons:</b>{{data.add_ons}}</p>
+        </div>
+        <div id="divsamp" class="table-responsive" style="float:right;">
+          <p><b>Attendant:</b>{{data.attendant_name}}</p>
+          <p><b>Estimated Time:</b>{{mintohour(data.estimated_time)}}</p>
+          <p><b>Total amount:</b>₱{{data.total_amount}}</p>
+          <button type="button" class="btn btn-success btn-sm" ng-click=startreservation(data,$index)>Start </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+</div>

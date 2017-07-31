@@ -1,0 +1,151 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>View Members</h3>
+<br>
+
+<div id="container">
+<!-- <div class="container"> -->
+  <ul class="nav nav-pills" style="margin-left: 10%;">
+    <li class="active"><a data-toggle="pill" href="!#personalized">Personalized</a></li>
+    <li><a data-toggle="pill" href="!#family">Family</a></li>
+  </ul>
+  <br>
+
+  <div class="tab-content">
+
+    <div id="personalized" class="tab-pane fade in active">
+	  <input class="input form-control" class="fillup" type="text" name="name" placeholder="Enter Name Here..." ng-model="viewbyname" style="width: 80% !important; margin-left: 10%;">
+	  <br>
+			
+			<div id="div-container">			
+
+			<div id="divmain3" class="table-responsive">
+			<table class="table table-hover" style="font-size:11px;">
+			  <thead>
+			      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+			         
+			      </div>
+			  </thead>
+			  <thead>
+			    <tr style="background-color: #D3D3D3">
+				  <th></th>
+			      <th colspan="8"></th>
+			    </tr>
+			  </thead>
+			  <tbody ng-repeat="data in PersonalizedMembers | filter : viewbyname | limitTo: 15">
+			    <tr ng-click="onclick(data)">
+			      <td scope="row" width="5%">
+			        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+			        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+			        </td>
+			      <td ng-bind="data.name" class="li-table" width="95%"></td>
+			    </tr>
+			    <tr ng-show=data.show>
+			      <td colspan="8">
+				      <div style="width: 50%;display:inline-block;height: 200px">
+				          <p><b>Address:</b> {{data.address}}</p>
+				          <p><b>Mobile Number:</b>  {{data.mobile_number}}</p>
+				          <p><b>Landline Number:</b>  {{data.landline_number}}</p>
+				          <p><b>Email Address:</b>  {{data.email_address}}</p>
+			              <p><b>Birth Date:</b> {{data.birthdate}}</p>
+				      </div>
+				      <div style="width: 50%;float:right;height: 200px">
+  				          <p><b>Membership Type:</b> {{data.membertype}}</p>
+  			              <p><b>Branch:</b> {{data.branch}}</p>
+			              <p><b>Accomodated by:</b> {{data.attendant_name}}</p>
+			              <p><b>Membership Cost:</b> {{data.membershipcost}}</p>
+			              <p><b>Member Since:</b> {{data.datecreated}}</p>
+			              <p><b>Where did you learn/hear about banahaw? :</b> {{data.feedback}}</p>
+			              <br>
+			              <div style="margin-left: 0%; display: inline-block; width: 100%;">
+				              <button ng-click="viewhistory(data.member00id)" type="button" class="btn btn-warning btn-sm">
+				              	View History
+				              </button>
+				              <button ng-click="editinfo(data, $index)" type="button" class="btn btn-danger btn-sm">
+				              	Edit Personal Info.
+				              </button>
+			              </div>
+				      </div>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+    </div>
+	</div>
+
+	
+
+    <div id="family" class="tab-pane fade">
+      <input class="input form-control" class="fillup" type="text" name="name" placeholder="Enter Name Here..." ng-model="viewbyname2" style="width: 80% !important; margin-left: 10%;">
+	  <br>
+			<div id="div-container">
+			<div id="divmain3" class="table-responsive">
+			<table class="table table-hover" style="font-size:11px;">
+			  <thead>
+			      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+			         
+			      </div>
+			  </thead>
+			  <thead>
+			    <tr style="background-color: #D3D3D3">
+				  <th></th>
+			      <th colspan="8"></th>
+			    </tr>
+			  </thead>
+			  <tbody ng-repeat="data in Family | filter : viewbyname2 | limitTo: 15">
+			    <tr ng-click="onclick(data)">
+			      <td scope="row" width="5%">
+			        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+			        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+			        </td>
+			      <td ng-bind="data.name" class="li-table" width="95%"></td>
+			    </tr>
+			    <tr ng-show=data.show>
+			      <td colspan="8">
+			      	  <div style="width: 33%;float:left;height: 200px">
+			      	  	  <p><b>Submembers:</b> </p>
+			      	  	  <p ng-repeat="mem in submember[data.member00id]">{{mem.name}}</p>
+			      	  	
+			      	  </div>
+				      <div style="width: 33%;display:inline-block;height: 200px">
+				          <p><b>Address:</b> {{data.address}}</p>
+				          <p><b>Mobile Number:</b>  {{data.mobile_number}}</p>
+				          <p><b>Landline Number:</b>  {{data.landline_number}}</p>
+				          <p><b>Email Address:</b>  {{data.email_address}}</p>
+			              <p><b>Birth Date:</b> {{data.birthdate}}</p>
+				      </div>
+				      <div style="width: 33%;float:right;height: 200px">
+				          <p><b>Membership Type:</b> {{data.membertype}}</p>
+			              <p><b>Accomodated by:</b> {{data.attendant_name}}</p>
+			              <p><b>Membership Cost:</b> {{data.membershipcost}}</p>
+			              <p><b>Where did you learn/hear about banahaw? :</b> {{data.feedback}}</p>
+			              <p><b>Member Since:</b> {{data.datecreated}}</p>
+			              <p><b>Branch:</b> {{data.branch}}</p>
+			              <div style="margin-left: 0%; display: inline-block; width: 100%;">
+				              <button ng-click="viewhistory(data.member00id)" type="button" class="btn btn-warning btn-sm">
+				              	View History
+				              </button>
+				              <button ng-click="editinfo(data, $index)" type="button" class="btn btn-danger btn-sm">
+				              	Edit Personal Info.
+				              </button>
+			              </div>
+				      </div>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+    </div>
+</div>
+  </div>
+
+<!-- </div> -->
+</div>
+
+</div>

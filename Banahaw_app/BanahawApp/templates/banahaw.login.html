@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>lBanahaw Log-in</title>
+	<link rel="stylesheet" type="text/css" href="css/banahaw.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+
+</head>
+<body ng-app = 'MyApp'>
+	<div id="background">
+
+
+	</div>
+	<div class="jumbotron" ng-controller='MyController'>
+		<img id="logo" src="img/banahaw.png"></br></br></br></br>
+		<input ng-model = "username" class="input form-control" type="text" name="user" height="20" placeholder="username" autofocus> </br>
+		<input ng-model = "password" class="input form-control" type="password" name="password" placeholder="password" ></br>
+		<button type="button" class="btn btn-lg btn-success" ng-click="validate(username,password)">LOG IN</button>
+
+		<div id="error" ng-show="status">
+			<p>{% raw %}{{ msg }}{% endraw %}</p>			
+		</div>
+	</div>
+
+
+
+
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/MyAngular/LoginAngular.js"></script>
+<script src="js/background-carousel.js"></script>
+
+
+</body>
+</html>

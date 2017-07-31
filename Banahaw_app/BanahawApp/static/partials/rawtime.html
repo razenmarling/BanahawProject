@@ -1,0 +1,71 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>Time-In & Time-Out</h3>
+<br>
+
+<div id="validation">
+  <input class="input-top form-control" type="text" placeholder="Enter Name of Attendant:" autofocus="true" ng-model="name" uib-typeahead="m.attendant_name for m in attendants | filter:$viewValue" typeahead-on-select="attendantvalidation($item)">
+  <br>
+</div>
+
+<div id="divmain1" ng-show="rawtime_form">
+<table>
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+         
+      </div>
+  </thead>
+  <thead>
+      <div style="background-color: #D3D3D3;width: 100%; height: 40px;"></div>
+  </thead>
+</table>
+<div class="form2">
+    <div class="table-responsive">
+<table class="table table-striped">
+                
+        <tbody>
+          <tr>
+            <td>Trandate</td>
+            <td></td>
+            <td>
+                <datepicker datepicker-class="class1" date-format="dd-MMMM-yyyy" >
+                  <input class="input form-control" class="fillup" type="text" name="" placeholder="Trandate" ng-model="trandate">
+                </datepicker>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Time-In</td>
+            <td></td>
+            <td>
+              <div uib-timepicker ng-model="timein" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Time-Out</td>
+            <td></td>
+            <td>
+              <div uib-timepicker ng-model="timeout" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+            </td>
+          </tr>
+
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <input class="input form-control btn-style" type="submit" name="" value="Confirm" ng-click="confirm(trandate,timein,timeout)">
+            </td>
+          </tr>
+
+        </tbody>
+              </table>
+          </div>
+  </div>
+</div>
+</div>

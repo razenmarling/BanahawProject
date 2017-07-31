@@ -1,0 +1,125 @@
+<head>
+	<link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>Walk-In</h3>
+<br>
+
+<div id="divmain3">
+<table>
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+         
+      </div>
+  </thead>
+  <thead>
+      <div style="background-color: #D3D3D3;width: 100%; height: 40px;"></div>
+  </thead>
+</table>
+<div class="form2" ng-show="transac_inputs">
+		<div class="table-responsive">
+            <table class="table table-striped">
+              
+              <tbody>
+
+                <tr>
+                  <td>Name</td>
+                  <td></td>
+                  <td><input class="input form-control" type="text" name="" ng-model="name">
+                  </td>
+                </tr>
+
+                  <tr>
+                    <td>Branch</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedbranch" ng-options="b.branch_name for b in branches">
+                        <option value="" disabled>Choose Branch Here..</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Services</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedservicetype" 
+                      ng-change="OnChangeofServices(selectedservicetype)" ng-options="ST for ST in servicestype">
+                        <option value="" disabled>Choose Services Here..</option>
+                      </select></td>
+                  </tr>
+
+                <tr ng-hide="HnSregularservies">
+                  <td>Regular Services</td>
+                  <td></td>
+                  <td>
+                  	<select class="input form-control" ng-model="selectedservices" ng-change="OnChangeofRegularServices(selectedservices)" ng-options="RS.service_name for RS in RegularServices">
+                    <option value="" disabled>Choose Regular Services Here..</option>
+                    </select></td>
+                </tr>
+
+                <tr ng-hide="HnShealingpackages">
+                  <td>Healing Packages</td>
+                  <td></td>
+                  <td>
+				          	<select class="input form-control" ng-model="selectedpackages" ng-change="OnChangeofHealingPackages(selectedpackages)" ng-options="HS.package_name for HS in HealingPackages">
+                    <option value="" disabled>Choose Healing Packages Here..</option>
+                    </select></td>
+                </tr>
+
+                  <tr ng-hide="HnSfacialservice">
+                    <td>Facial Services</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedfservices" ng-change="OnChangeofFacialService(selectedfservices)" ng-options="FS.facial_services_name for FS in FacialServices">
+                        <option value="" disabled>Choose Facial Services Here..</option>
+                      </select></td>
+                  </tr>
+
+                  <tr ng-hide="HnSpromoservice">
+                    <td>Promo Services</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedpservices" ng-change="OnChangeofPromoService(selectedfservices)" ng-options="PS.description for PS in PromoService">
+                        <option value="" disabled>Choose Promo Services Here..</option>
+                      </select></td>
+                  </tr>
+
+                <tr>
+                  <td>Add-ons</td>
+                  <td></td>
+                  <td>
+                    <oi-select
+                      oi-options="AO.add_ons_name for AO in add_ons"
+                      ng-model="bundle"
+                      multiple
+                      placeholder="Select Add-ons Here..">
+                    </oi-select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Name of Attendant</td>
+                  <td></td>
+                  <td>
+                    <select class="input form-control" ng-model="selected_attendant" ng-options="Att.attendant_name for Att in attendants">
+                      <option value="" disabled>Choose Attendant Here..</option>
+                    </select>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+	</div>
+</div>
+  <input class="input form-control btn-style" type="submit" name="" value="Confirm"
+  style="position: relative;
+  margin-top: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 30% !important;" ng-click="confirm()" ng-disabled="!selected_attendant && !name && (!selectedpackages || !selectedservices || !selectedfservices)">
+</div>

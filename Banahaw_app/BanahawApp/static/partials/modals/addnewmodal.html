@@ -1,0 +1,96 @@
+<head>
+	<link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+<br>
+<br>
+<br>
+<br>
+<div id="main">
+
+<div id="divmain3" style="border: none !important;">
+<table>
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+         
+      </div>
+  </thead>
+  <thead>
+      <div style="background-color: #D3D3D3;width: 100%; height: 40px;"></div>
+  </thead>
+</table>
+
+<div class="form2">
+		<div class="table-responsive" style="height: 600px !important;">
+            <table class="table table-striped">
+              
+              <tbody>
+
+				<tr>
+					<td ng-show="type == 'regservices'">Service Name</td>
+					<td ng-show="type == 'package'">Package Name</td>
+					<td ng-show="type == 'facial'">Facial Service Name</td>
+					<td ng-show="type == 'addons'">Add-Ons Name</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="name">
+					</td>
+				</tr>
+
+				<tr ng-show= "type == 'regservices' ">
+					<td>Off Peak Price</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="off_peak_price">
+					</td>
+				</tr>
+
+				<tr ng-show= "type == 'regservices' ">
+					<td>Peak Price</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="peak_price">
+					</td>
+				</tr>
+
+				<tr ng-show= "type == 'package' || type == 'facial' || type == 'addons' ">
+					<td>Member Price</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="mem_price">
+					</td>
+				</tr>
+
+				<tr>
+					<td>Non-Member Price</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="non_mem_price">
+					</td>
+				</tr>
+
+				<tr>
+					<td>Duration(Min)</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="duration">
+					</td>
+				</tr>
+
+	          <tr>
+				<td colspan="3">
+				  <input class="input form-control btn-style" type="submit" name="" value="Confirm"
+				  style="position: relative;
+				  margin-top: 50px;
+				  margin-right: auto;
+				  margin-left: auto;
+				  width: 40% !important;" ng-click="confirm()" ng-disabled="!name">
+				 </td>
+	          </tr>
+                
+              </tbody>
+            </table>
+          </div>
+	</div>
+</div>
+</div>

@@ -1,0 +1,134 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>{{MembershipType}}</h3>
+<br>
+
+<div id="validation">
+  <input class="input-top form-control" type="text" placeholder="Enter Name of Customer:" autofocus="true" ng-model="name" uib-typeahead="m.name for m in Members | filter:$viewValue" typeahead-on-select="MemberValidation($item)" ng-change="Membersquery(name)">
+  <br>
+</div>
+
+<div id="divmain1" ng-show="transac_inputs">
+<table>
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+         
+      </div>
+  </thead>
+  <thead>
+      <div style="background-color: #D3D3D3;width: 100%; height: 40px;"></div>
+  </thead>
+</table>
+<div class="form2">
+    <div class="table-responsive">
+<table class="table table-striped">
+                
+                <tbody>
+
+                  <tr>
+                    <td>Reservation Date</td>
+                    <td></td>
+                    <td>
+                        <datepicker datepicker-class="class1" date-format="yyyy-MM-dd" >
+                          <input class="input form-control" class="fillup" type="text" name="" placeholder="Reservation Date" ng-model="reservdate">
+                        </datepicker>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Reservation Time</td>
+                    <td></td>
+                    <td>
+                      <input class="input form-control" type="text" name="" ng-model="reservtime" ng-click="gettime()" ng-bind="reservtime" placeholder="Reservation Time">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Branch</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedbranch" 
+                      ng-change="OnChangeofbranch(selectedbranch)" ng-options="b.branch_name for b in branches">
+                        <option value="" disabled>Choose Branch Here..</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Services</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedservicetype" 
+                      ng-change="OnChangeofServices(selectedservicetype)" ng-options="ST for ST in servicestype">
+                        <option value="" disabled>Choose Services Here..</option>
+                      </select></td>
+                  </tr>
+
+                  <tr ng-hide="HnSregularservies">
+                    <td>Regular Services</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedservices" ng-change="OnChangeofRegularServices(selectedservices)" ng-options="RS.service_name for RS in RegularServices">
+                        <option value="" disabled>Choose Regular Services Here..</option>
+                      </select></td>
+                  </tr>
+
+                  <tr ng-hide="HnShealingpackages">
+                    <td>Healing Packages</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedpackages" ng-change="OnChangeofHealingPackages(selectedpackages)" ng-options="HS.package_name for HS in HealingPackages">
+                        <option value="" disabled>Choose Healing Packages Here..</option>
+                      </select></td>
+                  </tr>
+
+                  <tr ng-hide="HnSfacialservice">
+                    <td>Facial Services</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selectedfservices" ng-change="OnChangeofFacialService(selectedfservices)" ng-options="FS.facial_services_name for FS in FacialServices">
+                        <option value="" disabled>Choose Facial Services Here..</option>
+                      </select></td>
+                  </tr>
+
+                  <tr>
+                    <td>Add-ons</td>
+                    <td></td>
+                    <td>
+                      <oi-select 
+                        oi-options="AO.add_ons_name for AO in add_ons"
+                        ng-model="bundle"
+                        ng-change="OnChangeofAddOns(bundle)"
+                        multiple
+                        placeholder="Select Add-ons Here..">
+                      </oi-select>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Name of Attendant</td>
+                    <td></td>
+                    <td>
+                      <select class="input form-control" ng-model="selected_attendant" ng-change="OnChangeofAttendant(selected_attendant)" ng-options="Att.attendant_name for Att in attendants">
+                        <option value="" disabled>Choose Attendant Here..</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+          </div>
+  </div>
+</div>
+  <input class="input form-control btn-style" type="submit" name="" value="Confirm"
+  style="position: relative;
+  margin-top: 50px;
+  margin-right: auto;
+  margin-left: 50%;
+  width: 30% !important;" ng-show="transac_inputs" ng-click="confirm()" ng-disabled="(!selected_attendant || !(!selectedpackages || !selectedservices || !selectedfservices) || !reservdate || !reservtime)">
+</div>

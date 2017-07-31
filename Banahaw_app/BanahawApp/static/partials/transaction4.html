@@ -1,0 +1,77 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>Transaction History</h3>
+<br>
+
+<div id="divmain2">
+<table class="table-responsive" style="border-spacing: 20px; border-collapse: separate;">
+  <tr>
+      <td><span>&nbsp&nbsp</span></td>
+      <td>
+      <datepicker datepicker-class="class1" date-format="yyyy-MM-dd" >
+        <input class="input form-control class2" class="fillup" type="text" name="" placeholder="Startdate" ng-model="Startdate">
+      </datepicker>
+      </td>
+      <td><span>To&nbsp</span></td>
+      <td>
+      <datepicker datepicker-class="class1" date-format="yyyy-MM-dd" >
+        <input class="input form-control class2" class="fillup" type="text" name="" placeholder="Enddate" ng-model="Enddate">
+      </datepicker>
+      </td>
+      <td><span>&nbsp&nbsp</span></td>
+      <td>
+        <button type="button" class="btn btn-md" style="background-color: #2E8B57; color: white;" ng-click="StartSearch(Startdate,Enddate)">
+        Search</button>
+      </td>
+    
+  </tr>
+
+</table>
+</div>
+
+<br>
+<div ng-if="!showtable">NO RECORDS FOUND</div>
+<div id="div-container"  ng-if="showtable">
+  <div id="divmain3" class="table-responsive" style="width:100% !important">
+
+  <table class="table table-bordered" style="font-size:11px;" bordercolor="black">
+    <thead>
+        <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+        </div>
+    </thead>
+    <thead>
+      <tr style="background-color: #D3D3D3">
+        <th>Date</th>
+        <th>Transaction Type</th>
+        <th>Client Name</th>
+        <th>Services Done</th>
+        <th>Add - ons</th>
+        <th>Attendant</th>
+        <th>Amount Paid by Client</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="data in history">
+      <tr>
+        <td ng-bind="data.date" class="li-table"></td>
+        <td ng-bind="data.transactiontype" class="li-table"></td>
+        <td ng-bind="data.client" class="li-table"></td>
+        <td ng-bind="data.services" class="li-table"></td>
+        <td ng-bind="data.addons" class="li-table"></td>
+        <td ng-bind="data.attendant" class="li-table"></td>
+        <td ng-bind="data.total" class="li-table"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  </div>
+</div>
+<br>
+<p class="spantotals" ng-show="showtotal">Total Incentives On Membership: {{total_on_mem | number : fractionSize}}</p><br>
+<p class="spantotals" ng-show="showtotal">Total Commision On Services: {{total_on_serv | number : fractionSize}}</p><br>
+<p class="spantotals" ng-show="showtotal">Total Net Sales: {{total_sales | number : fractionSize}}</p>
+</div>

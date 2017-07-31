@@ -1,0 +1,98 @@
+<head>
+	<link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>Setup Promo</h3>
+<br>
+
+<div id="divmain3" style="border: none !important;">
+<table>
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+         
+      </div>
+  </thead>
+  <thead>
+      <div style="background-color: #D3D3D3;width: 100%; height: 40px;"></div>
+  </thead>
+</table>
+
+<div class="form2"">
+		<div class="table-responsive" style="height: 600px !important;">
+            <table class="table table-striped">
+              
+              <tbody>
+
+				<tr>
+					<td>Promo Name</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="promoname">
+					</td>
+				</tr>
+
+				<tr>
+					<td>Member Price</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="mem_price">
+					</td>
+				</tr>
+
+				<tr>
+					<td>Non-Member Price</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="non_mem_price">
+					</td>
+				</tr>
+
+				<tr>
+					<td>Duration(Min)</td>
+					<td></td>
+					<td>
+						<input class="input form-control" type="text" name="" ng-model="duration">
+					</td>
+				</tr>
+
+	          <tr>
+	            <td>Startdate</td>
+	            <td></td>
+	            <td>
+	                <datepicker datepicker-class="class1" date-format="dd-MMMM-yyyy" >
+	                  <input class="input form-control" class="fillup" type="text" name="" placeholder="Datestart Effectivity" ng-model="startdate">
+	                </datepicker>
+	            </td>
+	          </tr>
+
+	          <tr>
+	            <td>Enddate</td>
+	            <td></td>
+	            <td>
+	                <datepicker datepicker-class="class1" date-format="dd-MMMM-yyyy" >
+	                  <input class="input form-control" class="fillup" type="text" name="" placeholder="Dateend Effectivity" ng-model="enddate">
+	                </datepicker>
+	            </td>
+	          </tr>
+
+	          <tr>
+				<td colspan="3">
+				  <input class="input form-control btn-style" type="submit" name="" value="Confirm"
+				  style="position: relative;
+				  margin-top: 50px;
+				  margin-right: auto;
+				  margin-left: auto;
+				  width: 40% !important;" ng-click="confirm()" ng-disabled="!promoname || !mem_price || !non_mem_price || !startdate || !enddate">
+				 </td>
+	          	
+	          </tr>
+                
+              </tbody>
+            </table>
+          </div>
+	</div>
+</div>
+</div>

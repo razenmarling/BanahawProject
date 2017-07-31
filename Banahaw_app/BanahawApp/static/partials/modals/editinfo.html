@@ -1,0 +1,96 @@
+<!-- Start of header -->
+<div class="modal-header">
+	<h3 class="modal-title">{{data_obj.name}} - {{data_obj.membertype}}</h3>
+</div>
+<!-- End of header -->
+
+<!-- Body -->
+<div id="main">
+<div id="divmain3">
+<table>
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+         
+      </div>
+  </thead>
+  <thead>
+      <div style="background-color: #D3D3D3;width: 100%; height: 40px;"></div>
+  </thead>
+</table>
+<div class="div-content">
+  <div class="form2">
+    <div class="table-responsive">
+      <table class="table table-striped">
+
+        <tbody>
+
+          <tr>
+            <td>Name</td>
+            <td></td>
+            <td>
+              <form name="nameform">
+              <input class="input form-control" class="fillup" type="text" name="name" placeholder="Name" ng-model="name">
+              </form>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Birthdate</td>
+            <td></td>
+            <td>
+                <datepicker datepicker-class="class1" date-format="dd-MMMM-yyyy" >
+                  <input class="input form-control" class="fillup" type="text" name="" placeholder="Birthdate" ng-model="birthdate">
+                </datepicker>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Address</td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name="" placeholder="Address" ng-model="address">
+            </td>
+          </tr>
+
+          <tr>
+            <td>Mobile Number</td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name="" placeholder="Mobile Number" ng-model="mobileNum">
+            </td>
+          </tr>
+
+          <tr>
+            <td>Landline Number</td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name="" placeholder="Landline Number" ng-model="landlineNum">
+            </td>
+          </tr>
+
+          <tr>
+            <td>Email address</td>
+            <td></td>
+            <td>
+              <input class="input form-control" class="fillup" type="text" name="" placeholder="E-Mail" ng-model="email">
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- End of Body -->
+
+<!-- Start of footer -->
+<div class="modal-footer">
+	<button class="btn btn-warning" type="button"
+	ng-click="save()">Save</button>
+	<button class="btn btn-warning" type="button"
+	ng-click="close()">Cancel</button>
+</div>
+<!-- End of footer -->

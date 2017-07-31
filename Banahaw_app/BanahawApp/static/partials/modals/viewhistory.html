@@ -1,0 +1,56 @@
+<div class="modal-header">
+	<h3 class="modal-title">Transaction History</h3>
+</div>
+<div class="modal-body">
+	<div ng-if="totaldata == 0">
+		No Transaction Data Saved in the Database
+	</div>
+
+	<div ng-if="totaldata >= 1">
+		<div id="divmain3" class="table-responsive">
+			<table class="table table-hover" style="font-size:11px;">
+				<thead>
+					<div style="background-color: #2E8B57;width: 100%; height: 50px;"></div>
+				</thead>
+				<thead>
+					<tr style="background-color: #D3D3D3">
+						<th></th>
+						<th colspan="8"></th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="data in transactiondata | orderBy:data.datestart">
+					<tr ng-click="onclick(data)">
+						<td scope="row" width="5%">
+							<i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+							<i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+						</td>
+						<td class="li-table" width="95%">{{data.datestart.substring(0, 10)}}</td>
+					</tr>
+					<tr ng-show="data.show">
+						<td colspan="8">
+							<div style="width: 50%;display:inline-block;height: 200px">
+								<p><b>Name:</b> {{data.client_name}}</p>
+								<br>
+								<p><b>Service Type:</b>  {{data.service_type}}</p>
+								<p><b>Service:</b>  {{data.service}}</p>
+								<br>
+								<p><b>Attendant:</b>  {{data.attendant_name}}</p>
+								<p><b>Time Spent:</b>  {{data.time_spent}}MIN</p>
+								<p><b>Amount Paid:</b>  {{data.total_amount}}</p>
+							</div>
+							<div style="width: 50%;float:right;height: 200px">
+								<p><b>Add-Ons:</b> {{data.add_ons}}</p>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+
+</div>
+<div class="modal-footer">
+	<p><b>Total Transactions:</b> {{totaldata}}</p>
+</div>

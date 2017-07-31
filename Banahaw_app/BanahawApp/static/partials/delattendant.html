@@ -1,0 +1,59 @@
+<head>
+  <link href="css/content/transaction.css" rel="stylesheet">
+
+</head>
+
+<div id="main">
+
+<h3>Attendants</h3>
+<br>
+
+<div class="table-responsive" style="width: 80%; margin: auto;
+  border-style: ridge;">
+<table class="table table-hover" style="font-size:11px;">
+  <thead>
+      <div style="background-color: #2E8B57;width: 100%; height: 50px;">
+         
+      </div>
+  </thead>
+  <thead>
+    <tr style="background-color: #D3D3D3">
+      <th></th>
+      <th>Attendant Name</th>
+      <th>Mobile Number</th>
+      <th>Position</th>
+      <th>Allowance</th>
+      <th>Date Hired</th>
+      <th>Address</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody ng-repeat="data in attendants">
+    <tr ng-click="onclick(data)">
+      <th scope="row">
+        <i class="fa fa-chevron-right" aria-hidden="true" ng-if=!data.show></i>
+        <i class="fa fa-chevron-down" aria-hidden="true" ng-if=data.show></i>
+        </th>
+      <td ng-bind="data.attendant_name" class="li-table"></td>
+      <td ng-bind="data.mobilenumber" class="li-table"></td>
+      <td ng-bind="data.position" class="li-table"></td>
+      <td ng-bind="data.allowance" class="li-table"></td>
+      <td ng-bind="data.hiredate" class="li-table"></td>
+      <td ng-bind="data.address" class="li-table"></td>
+      <td><button ng-click="delatt(data, $index)" type="button" class="btn btn-danger btn-xs">Resign</button></td>
+    </tr>
+    <tr ng-show=data.show>
+      <td colspan="8">
+        <div>
+            <span>Position</span><input class="input form-control" type="text" name="" ng-model="attposition">
+
+            <span>Allowance</span><input class="input form-control" type="text" name="" ng-model="attallowance">
+
+            <button ng-click="editAtt(data,attposition,attallowance)" type="button" class="btn btn-success btn-md" style="margin-left: 80%; margin-top: -100px;" ng-if="attposition || attallowance">Save</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
