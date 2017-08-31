@@ -1,4 +1,5 @@
 """Controller."""
+from .model import Uploadmodel
 from flask_restful import Resource, reqparse
 import werkzeug
 import os
@@ -26,7 +27,16 @@ class Uploadhandler(Resource):
 			status = 404
 			return {'Messsage': 'File Not Found'}, status
 
-		file.save(os.path.join(UPLOADED_PATH, file.filename))
+		file_path = os.path.join(UPLOADED_PATH, file.filename)
 
-		return status
+		try:
+			file.save(file_path)
+		except:
+			status = 500
+			return {'Message': 'Error on Saving File'}, status
+		else:
+			um = Uploadmodel(file_path)
+			um.process_file()
+
+		return {'Message':'Success'}, status
 

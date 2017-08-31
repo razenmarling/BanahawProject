@@ -3136,6 +3136,7 @@ MyApp2.controller('uploadcontroller',['$scope', 'Requests', function($scope, Req
 		maxFilesize : '10',
 		acceptedFiles : '.xlsx',
 		addRemoveLinks : true,
+		autoProcessQueue : false
 	};
 
 	$scope.dzCallbacks = {
@@ -3150,6 +3151,10 @@ MyApp2.controller('uploadcontroller',['$scope', 'Requests', function($scope, Req
 
 	$scope.removeNewFile = function(){
 		$scope.dzMethods.removeFile($scope.newFile);
+	}
+
+	$scope.confirm = function(argument) {
+		$scope.dzMethods.processQueue();
 	}
 
 

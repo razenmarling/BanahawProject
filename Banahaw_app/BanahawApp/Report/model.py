@@ -689,7 +689,6 @@ class Memberslist_report(object):
 		dateend = self.__args['to']
 
 		memberslist = self.__get_members(datestart, dateend)
-		print(memberslist)
 		retval = self.__generate_excelfile(memberslist)
 
 		return retval
