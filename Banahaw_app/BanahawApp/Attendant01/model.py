@@ -78,3 +78,27 @@ class Attendants01_data(Mini_func):
 						continue
 
 			self.__session.commit()
+
+	def update_ut(self, **kwargs):
+		"""Insert Undertime."""
+		retval = True
+		search_key = ('attendantid', 'trandate')
+		att_filter = []
+
+		for key in search_key:
+			if kwargs[key]:
+				att_filter.append(getattr(T_Attendants01, key) == kwargs[key])
+
+		exist = self.__session.query(T_Attendants01).filter(*att_filter).first()
+
+		if kwargs['UT'] and exist:
+			try:
+				setattr(exist, 'UT', kwargs['UT'])
+			except TypeError:
+				retval = False
+			else:
+				self.__session.commit()
+		else:
+			retval = False
+
+		return retval

@@ -18,6 +18,9 @@ class Uploadhandler(Resource):
 		status = 201
 		UPLOADED_PATH = os.getcwd() + '/Upload'
 
+		if not os.path.isdir(UPLOADED_PATH):
+			os.makedirs(UPLOADED_PATH)
+
 		self.__reqparser.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
 		self.__args = self.__reqparser.parse_args()
 

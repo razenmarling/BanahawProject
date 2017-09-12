@@ -90,6 +90,10 @@ MyApp2.config(['$routeProvider',function($routeProvider){
 		templateUrl : "partials/rawtime.html",
 		controller : "RawtimeController"
 	})
+	.when('/attendance/encode-ut',{
+		templateUrl : "partials/ut.html",
+		controller : "UTController"
+	})
 	.when('/promos',{
 		templateUrl : "partials/promos.html",
 		controller : "PromoController"
@@ -3161,6 +3165,27 @@ MyApp2.controller('uploadcontroller',['$scope', 'Requests', function($scope, Req
 
 }]);
 
+MyApp2.controller('UTController',['$scope', 'Requests', function($scope, Requests){
+
+	Requests.getAttendants().then(function(response){
+		if (response.status = 'OK'){
+			var data = response.data.data
+			$scope.attendants = data
+		};
+	});
+
+	$scope.confirm = function(attendant, ut, trandate){
+		var json_data = {
+			'attendantid': parseInt(attendant),
+			'UT': parseInt(ut),
+			'trandate': trandate
+		}
+
+		Requests.updateUT(json_data)
+	};
+
+}]);
+
 
 MyApp2.factory('Requests',function($http){
 		return {
@@ -3528,6 +3553,14 @@ MyApp2.factory('Requests',function($http){
 				url:'http://localhost:5000/promos',
 				headers: {'Content-type': 'application/json'},
 				data: json_data
+				});
+			},
+			updateUT:function(param){
+				return $http({
+				method:'PUT',
+				url:'http://localhost:5000/rawtime',
+				headers: {'Content-type': 'application/json'},
+				data: param,
 				});
 			}
 		}
