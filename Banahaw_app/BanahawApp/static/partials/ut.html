@@ -39,7 +39,7 @@
 					<td>Attendant</td>
 					<td></td>
 					<td>
-						  <input class="input-top form-control" type="text" placeholder="Enter Name of Attendant:" autofocus="true" ng-model="selectedattendant" uib-typeahead="m.attendant_name for m in attendants | filter:$viewValue">
+						  <input class="input-top form-control" type="text" placeholder="Enter Name of Attendant:" autofocus="true" ng-model="selectedattendant" uib-typeahead="m.attendant_name for m in attendants | filter:$viewValue" typeahead-on-select="get_attendant($item)">
 					</td>
 				</tr>
 
@@ -60,5 +60,5 @@
   margin-top: 50px;
   margin-right: auto;
   margin-left: auto;
-  width: 30% !important;" ng-click="confirm(selectedattendant, minutes, trandate)" ng-disabled="!selectedattendant || !minutes">
+  width: 30% !important;" ng-click="confirm(minutes, trandate)" ng-disabled="!selectedattendant || !minutes">
 </div>
