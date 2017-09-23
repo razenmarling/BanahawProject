@@ -109,7 +109,7 @@ class T_Attendants01(GenericBase,Base):
     timein = Column(String(10))
     timeout = Column(String(10))
     trandate = Column(Date, default=datetime.datetime.now().date())
-    UT = Column(Integer)
+    UT = Column(Integer, default=0)
 
 class T_Member00(GenericBase,Base):
     __tablename__ = 'member00'

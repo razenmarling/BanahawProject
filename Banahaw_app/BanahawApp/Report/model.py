@@ -207,6 +207,8 @@ class Summary_report(object):
 		self.__session = Session()
 		self.__args = kwargs
 		self.__retval = dict()
+		self.__transact_count = 0
+		self.__new_mem_count = {'p':0, 'f':0, 'u':0}
 
 		# column start for insert of image
 		self.__column = 0
@@ -278,23 +280,35 @@ class Summary_report(object):
 
 			self.__retval[d.attendantid]['dates'][d.trandate.strftime('%B-%d-%Y')] = timein + ' - ' + timeout
 
-			x = self.__compute_allowance(d.timein, d.timeout, self.__retval[d.attendantid]['allowance_perday'])
+			x = self.__compute_allowance(d.timein, d.timeout,
+										 self.__retval[d.attendantid]['allowance_perday'], d.UT)
 			self.__retval[d.attendantid]['allowance_total'] += x
 
-	def __compute_allowance(self, timein, timeout, allowance):
+	def __compute_allowance(self, timein, timeout, allowance, ut):
 
 		if any([not timein, not timeout]):
 			return 0
 
-		per_hour = allowance / 12
+		# 12 hours of working
+		working_hours_in_min = 720
+		halfday_in_min = working_hours_in_min / 2
 
 		timein = datetime.datetime.strptime(timein, '%I:%M %p')
 		timeout = datetime.datetime.strptime(timeout, '%I:%M %p')
-		timediff = timeout - timein
-		hours = int(timediff.seconds / 3600)
-		retval = int(per_hour * hours)
+		actual_worked_time = (timeout - timein).seconds / 60
 
-		return retval
+		if actual_worked_time >= working_hours_in_min:
+			retval = allowance
+		elif actual_worked_time < working_hours_in_min and actual_worked_time != halfday_in_min:
+			deduction = working_hours_in_min - actual_worked_time
+			retval = allowance - deduction
+		elif actual_worked_time == halfday_in_min:
+			retval = allowance / 2
+
+		# if ut:
+		# 	retval = retval - ut
+
+		return int(retval)
 
 	def __get_transactions(self):
 		search_filter = [getattr(T_Transaction, 'datecreated').between(self.__args['from'], self.__args['to'])]
@@ -303,6 +317,7 @@ class Summary_report(object):
 
 		temp_dict = dict()
 		for d in result:
+			self.__transact_count += 1
 			comms = self.__compute_commision(d.service,d.service_price,d.transaction_type,d.add_ons_price)
 			self.__retval[d.attendantid]['commision_total_service'] += comms[0]
 			self.__retval[d.attendantid]['commision_total_addons'] += comms[1]
@@ -374,9 +389,11 @@ class Summary_report(object):
 				continue
 
 			if d.membertype == 'Personalized':
+				self.__new_mem_count['p'] += 1
 				self.__retval[d.attendantid]['personalized_total'] += d.membershipcost
 				self.__retval[d.attendantid]['incentive_total_personalized'] += 25
 			elif d.membertype == 'Family':
+				self.__new_mem_count['f'] += 1
 				self.__retval[d.attendantid]['family_total'] += d.membershipcost
 				self.__retval[d.attendantid]['incentive_total_family'] += 50
 
@@ -386,6 +403,7 @@ class Summary_report(object):
 		result = self.__session.query(T_Member00).filter(*search_filter).all()
 
 		for d in result:
+			self.__new_mem_count['u'] += 1
 			self.__retval[d.upgraded_by]['upgraded_total'] += d.membershipcost / 2
 			self.__retval[d.upgraded_by]['incentive_total_upgraded'] += 25
 
@@ -594,6 +612,12 @@ class Summary_report(object):
 		loop = list(totaldata.keys())
 		loop.append('blank')
 		loop.append('blank')
+		loop.append('blank')
+		loop.append('blank')
+		loop.append('total_trans')
+		loop.append('new_mem_p')
+		loop.append('new_mem_f')
+		loop.append('new_mem_u')
 
 		for index, key in enumerate(loop):
 
@@ -642,6 +666,30 @@ class Summary_report(object):
 			elif index == 12:
 				self.__merge_cell_insert_head(ws, row_count, 'Total Net Sales', '339966')
 				self.__merge_cell_insert_data(ws, row_count, totaldata['total_net_sales'], '339966')
+			elif index == 13:
+				# blank
+				cell1 = ws.cell(row=row_count, column=self.__column)
+				cell2 = ws.cell(row=row_count, column=self.__column + 5)
+				mergecells = '{}:{}'.format(cell1.coordinate, cell2.coordinate)
+				ws.merge_cells(mergecells)
+			elif index == 14:
+				# blank
+				cell1 = ws.cell(row=row_count, column=self.__column)
+				cell2 = ws.cell(row=row_count, column=self.__column + 5)
+				mergecells = '{}:{}'.format(cell1.coordinate, cell2.coordinate)
+				ws.merge_cells(mergecells)
+			elif index == 15:
+				self.__merge_cell_insert_head(ws, row_count, 'Total Transactions Made', '070707')
+				self.__merge_cell_insert_data(ws, row_count, self.__transact_count, '070707')
+			elif index == 16:
+				self.__merge_cell_insert_head(ws, row_count, 'Total New Personalized Mem.', '070707')
+				self.__merge_cell_insert_data(ws, row_count, self.__new_mem_count['p'], '070707')
+			elif index == 17:
+				self.__merge_cell_insert_head(ws, row_count, 'Total New Family Mem.', '070707')
+				self.__merge_cell_insert_data(ws, row_count, self.__new_mem_count['f'], '070707')
+			elif index == 18:
+				self.__merge_cell_insert_head(ws, row_count, 'Total Upgraded Mem.', '070707')
+				self.__merge_cell_insert_data(ws, row_count, self.__new_mem_count['u'], '070707')
 
 			row_count += 1
 

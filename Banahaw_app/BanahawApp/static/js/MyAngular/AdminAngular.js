@@ -3165,7 +3165,7 @@ MyApp2.controller('uploadcontroller',['$scope', 'Requests', function($scope, Req
 
 }]);
 
-MyApp2.controller('UTController',['$scope', 'Requests', function($scope, Requests){
+MyApp2.controller('UTController',['$scope', 'Requests','$route', function($scope, Requests, $route){
 	$scope.selectedattendant = null
 
 	Requests.getAttendants().then(function(response){
@@ -3189,8 +3189,10 @@ MyApp2.controller('UTController',['$scope', 'Requests', function($scope, Request
 		Requests.updateUT(json_data).then(function(response){
 			if(response.status = 'OK'){
 				alert('Successfully Inserted Undertime')
+				$route.reload()
 			}else{
 				alert('Failed To Insert Undertime')
+				$route.reload()
 			};
 		});
 	};

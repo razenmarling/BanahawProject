@@ -32,14 +32,20 @@ class Uploadhandler(Resource):
 
 		file_path = os.path.join(UPLOADED_PATH, file.filename)
 
-		try:
-			file.save(file_path)
-		except:
-			status = 500
-			return {'Message': 'Error on Saving File'}, status
+		if not os.path.exists(file_path):
+
+			try:
+				file.save(file_path)
+			except:
+				status = 500
+				return {'Message': 'Error on Saving File'}, status
+			else:
+				um = Uploadmodel(file_path, file.filename)
+				um.process_file()
+
 		else:
-			um = Uploadmodel(file_path)
-			um.process_file()
+			status = 409
+			return {'Message': 'File Already Exist'}, status
 
 		return {'Message':'Success'}, status
 
