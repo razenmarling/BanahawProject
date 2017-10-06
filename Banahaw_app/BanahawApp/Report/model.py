@@ -8,7 +8,8 @@ import re
 from flask import request
 from sqlalchemy import and_
 from BanahawApp import Session,Mini_func, app
-from BanahawApp.table import T_Transaction, T_Member00, T_Attendants01, T_Attendants, T_Member01
+from BanahawApp.table import (T_Transaction, T_Member00, T_Attendants01,
+							  T_Attendants, T_Member01, T_Products)
 
 
 class Attendant_report(object):
@@ -893,3 +894,102 @@ class Memberslist_report(object):
 				retval[data.membertype].append(temp_dict)
 
 		return retval
+
+
+class Product_report(object):
+
+	def __init__(self, **kwargs):
+		"""."""
+		self.__session = Session()
+		self.__args = kwargs
+		self.__retval = None
+
+	def get_reports_data(self):
+		"""."""
+		prod_data = self.__get_products_sold()
+		filename = self.__generate_excelfile(prod_data)
+
+		return filename
+
+	def __get_products_sold(self):
+		"""."""
+		ds = self.__args.get('from', None)
+		de = self.__args.get('to', None)
+		search_filter = []
+		retval = []
+
+		if ds and de:
+			search_filter.append(getattr(T_Products,'datepurchased').between(ds,de))
+
+			data = self.__session.query(T_Products).filter(*search_filter).order_by(
+					T_Products.datepurchased).all()
+
+			for d in data:
+				r = d.toJSONExcept()
+				retval.append(r)
+
+		return retval
+
+	def __generate_excelfile(self, proddata):
+		wb = Workbook()
+		ws = wb.active
+
+		ws.title = "Products Report"
+		ws.sheet_properties.tabColor = '1072BA'
+
+		self.__insert_data_to_excel(ws, proddata)
+
+		filename = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+
+		folderpath = os.path.join(os.getcwd(), 'Reports')
+		if not os.path.exists(folderpath):
+			os.makedirs(folderpath)
+
+		retval = 'Product_Sales_report_' + filename + '.xlsx'
+		wb.save(os.path.join(folderpath, retval))
+
+		return retval
+
+	def __insert_data_to_excel(self, ws, data):
+		"""."""
+		total = 0
+		headers = ['datepurchased', 'customername', 'productname', 'amountpaid']
+
+		ft = Font(bold=True)
+		row_count = 1
+		for column_count, header in enumerate(headers):
+			cell = ws.cell(row=row_count, column=column_count + 1)
+			cell.value = header.upper()
+			cell.font = ft
+
+		row_count2 = 2
+		for data_dict in data:
+
+			for column_count, header in enumerate(headers):
+				if header == 'amountpaid':
+					total += data_dict[header]
+
+				cell = ws.cell(row=row_count2, column=column_count + 1)
+				cell.value = data_dict[header]
+
+			row_count2 += 1
+
+		cell1 = ws.cell(row=row_count2 + 2, column=1)
+		cell2 = ws.cell(row=row_count2 + 2, column=4)
+		mergecells = '{}:{}'.format(cell1.coordinate, cell2.coordinate)
+		ws.merge_cells(mergecells)
+		ft = Font(bold=True, italic=True, color='339966')
+		al = Alignment(horizontal='center', vertical='center')
+		cell1.font = ft
+		cell1.alignment = al
+		cell1.value = 'Total Sales'
+
+		cell3 = ws.cell(row=row_count2 + 3, column=1)
+		cell4 = ws.cell(row=row_count2 + 3, column=4)
+		mergecells = '{}:{}'.format(cell3.coordinate, cell4.coordinate)
+		ws.merge_cells(mergecells)
+		ft = Font(bold=True, italic=True, color='339966')
+		al = Alignment(horizontal='center', vertical='center')
+		cell3.font = ft
+		cell3.alignment = al
+		cell3.value = total

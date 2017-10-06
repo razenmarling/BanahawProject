@@ -26,6 +26,13 @@
               <tbody>
 
                 <tr>
+                  <td>Customer Name</td>
+                  <td></td>
+                  <td><input class="input form-control" type="text" name="" ng-model="customername">
+                  </td>
+                </tr>
+
+                <tr>
                   <td>Product Name</td>
                   <td></td>
                   <td><input class="input form-control" type="text" name="" ng-model="productname">
@@ -49,5 +56,5 @@
   margin-top: 50px;
   margin-right: auto;
   margin-left: auto;
-  width: 30% !important;" ng-click="confirm(productname, amount)" ng-disabled="!amount || !productname">
+  width: 30% !important;" ng-click="confirm(customername, productname, amount)" ng-disabled="!amount || !productname">
 </div>

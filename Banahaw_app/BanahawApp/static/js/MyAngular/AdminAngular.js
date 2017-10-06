@@ -110,6 +110,10 @@ MyApp2.config(['$routeProvider',function($routeProvider){
 		templateUrl : "partials/members_report.html",
 		controller : "MembersReportController"
 	})
+	.when('/reports/products_report',{
+		templateUrl : "partials/products_report.html",
+		controller : "ProductsReportController"
+	})
 	.when('/upload-members',{
 		templateUrl : "partials/upload.html",
 		controller : "uploadcontroller"
@@ -1023,8 +1027,20 @@ MyApp2.controller("TransactionModalController",function($scope,$uibModalInstance
    		var service_price = 0
    		var add_ons_price = []
 
+		var convertTime12to24 = function(time12h) {
+		  const [time, modifier] = time12h.split(' ');
+		  let [hours, minutes] = time.split(':');
+		  if (hours === '12') {
+		    hours = '00';
+		  }
+		  if (modifier === 'PM') {
+		    hours = parseInt(hours, 10) + 12;
+		  }
+		  return hours + minutes;
+		};
+
    		var date = new Date()
-   		var time = parseInt(String(date.getHours())+String(date.getMinutes().pad()))
+   		var time = parseInt(convertTime12to24(data.started))
 
    		$scope.getService = function(){
    			if($scope.transactiontype == 'Member'){
@@ -2922,10 +2938,11 @@ MyApp2.controller('RawtimeController',['$scope','Requests','$uibModal',function(
 }]);
 
 MyApp2.controller('ProductsController',['$scope', 'Requests', function($scope, Requests){
-	$scope.confirm = function(prodname,price){
+	$scope.confirm = function(custname, prodname,price){
 
 		var json_data = {
 			'productname': prodname,
+			'customername': custname,
 			'amountpaid': parseInt(price)
 		}
 
@@ -2934,6 +2951,7 @@ MyApp2.controller('ProductsController',['$scope', 'Requests', function($scope, R
 				alert('Successfully Purchased')
 				$scope.productname = ''
 				$scope.amount = ''
+				$scope.customername = ''
 			};
 		});
 	};
@@ -3123,6 +3141,24 @@ MyApp2.controller('MembersReportController',['$scope', 'Requests', '$window', fu
 			Requests.getMembersList(sdate,edate).then(function(response){
 				if(response.status='OK'){
 					var data = response.data
+					$window.location.href = 'http://localhost:5000/download-reports/' + data['filename'];
+				};
+			});
+
+		};
+	};
+
+}]);
+
+MyApp2.controller('ProductsReportController',['$scope', 'Requests', '$window', function($scope, Requests, $window){
+
+	$scope.generate = function(sdate, edate){
+
+		if (sdate && edate){
+			Requests.getProducts(sdate,edate).then(function(response){
+				if(response.status='OK'){
+					var data = response.data
+					console.log(data)
 					$window.location.href = 'http://localhost:5000/download-reports/' + data['filename'];
 				};
 			});
@@ -3540,6 +3576,12 @@ MyApp2.factory('Requests',function($http){
 				return $http({
 				method:'GET',
 				url:'http://localhost:5000/members-list'+'?from='+ds+'&'+'to='+de,
+				});
+			},
+			getProducts:function(ds,de){
+				return $http({
+				method:'GET',
+				url:'http://localhost:5000/products-sales-report'+'?from='+ds+'&'+'to='+de,
 				});
 			},
 			customizedGet:function(char){

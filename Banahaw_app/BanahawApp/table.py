@@ -203,6 +203,7 @@ class T_Products(GenericBase, Base):
 
     productid = Column(Integer, primary_key=True)
     productname = Column(String(100))
+    customername = Column(String(100))
     amountpaid = Column(Integer)
     datepurchased = Column(Date, default=datetime.datetime.now().date())
 
